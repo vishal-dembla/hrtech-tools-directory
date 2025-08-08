@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRTech Tools Directory</title>
+    <style>
+        /* --- CSS Variables for Theming --- */
+        :root {
+            /* Default to Dark Mode */
+            --bg-color: #000000;
+            --text-color: #FFFFFF;
+            --muted-text-color: #888888;
+            --border-color: #333333;
+            --accent-color: #FFFFFF;
+            --btn-bg-color: #FFFFFF;
+            --btn-text-color: #000000;
+            --btn-hover-border-color: #FFFFFF;
+            --btn-hover-text-color: #FFFFFF;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #F7F7F7;
+            --text-color: #222222;
+            --muted-text-color: #666666;
+            --border-color: #DDDDDD;
+            --accent-color: #007BFF; /* Blue accent from your other site */
+            --btn-bg-color: #222222;
+            --btn-text-color: #FFFFFF;
+            --btn-hover-border-color: #222222;
+            --btn-hover-text-color: #222222;
+        }
+
+        /* --- Global Styles --- */
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem 1rem;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        /* --- Layout & Typography --- */
+        .container { max-width: 700px; margin: 0 auto; }
+        p { color: var(--muted-text-color); margin: 0 0 1rem 0; }
+        a { color: var(--text-color); text-decoration: none; transition: opacity 0.2s ease; }
+        a:hover { opacity: 0.7; }
+        .link-arrow { color: var(--muted-text-color); display: inline-block; transition: transform 0.2s ease; }
+        a:hover .link-arrow { transform: translate(2px, -2px); }
+
+        /* --- Header & Theme Toggle --- */
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
+        header h1 { font-size: 1.25rem; font-weight: normal; margin: 0; }
+        .header-nav { display: flex; align-items: center; gap: 1.5rem; }
+        .header-nav a { color: var(--muted-text-color); text-decoration: none; font-size: 1rem; transition: color 0.2s ease; }
+        .header-nav a:hover { color: var(--text-color); }
+
+        #theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--muted-text-color);
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        #theme-toggle:hover {
+             border-color: var(--text-color);
+             color: var(--text-color);
+        }
+        /* Hide one icon at a time */
+        .icon-sun, .icon-moon { transition: opacity 0.3s ease; }
+        [data-theme="dark"] .icon-sun { display: block; }
+        [data-theme="dark"] .icon-moon { display: none; }
+        [data-theme="light"] .icon-sun { display: none; }
+        [data-theme="light"] .icon-moon { display: block; }
+        
+
+        main h2 { font-size: 1rem; color: var(--muted-text-color); font-weight: normal; margin-bottom: 2rem; }
+
+        /* --- Category Filters --- */
+        .category-filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color); }
+        .filter-btn { font-family: inherit; font-size: 0.875rem; background: none; border: 1px solid var(--border-color); color: var(--muted-text-color); padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; transition: all 0.2s ease; }
+        .filter-btn:hover { border-color: var(--btn-hover-border-color); color: var(--btn-hover-text-color); }
+        .filter-btn.active { background-color: var(--btn-bg-color); border-color: var(--btn-bg-color); color: var(--btn-text-color); font-weight: bold; }
+
+        /* --- Tool & Blog Lists --- */
+        .tool-list, .blog-list { list-style: none; padding: 0; margin: 0; }
+        .tool-card, .blog-post { border-bottom: 1px solid var(--border-color); }
+        .tool-card { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
+        .tool-info h3 { font-size: 1.125rem; font-weight: normal; margin: 0; }
+        .tool-category-tag { font-family: inherit; font-size: 0.875rem; color: var(--muted-text-color); border: 1px solid var(--border-color); padding: 0.25rem 0.75rem; border-radius: 15px; white-space: nowrap; cursor: pointer; transition: all 0.2s ease; }
+        .tool-category-tag:hover { border-color: var(--text-color); color: var(--text-color); }
+
+        .blog-post { display: flex; justify-content: space-between; align-items: flex-start; padding: 1rem 0; }
+        .blog-post:last-child { border-bottom: none; }
+        .blog-post-info h3 { font-size: 1rem; font-weight: normal; margin: 0 0 0.25rem 0; }
+        .blog-post-info a { color: var(--text-color); } /* Main text color for blog titles */
+        .blog-post-info p { font-size: 0.875rem; color: var(--muted-text-color); margin: 0; }
+        .blog-post-status { font-size: 0.875rem; color: var(--muted-text-color); white-space: nowrap; padding-top: 0.1rem; }
+        .blog-post-info a[href^="http"] .link-arrow { display: inline-block; } /* Show arrow for external links */
+        .blog-post-info a:not([href^="http"]) .link-arrow { display: none; } /* Hide for internal links */
+
+        /* --- Content Sections --- */
+        .content-section { margin-top: 5rem; padding-top: 3rem; border-top: 1px solid var(--border-color); }
+        .content-section h1 { font-size: 1.25rem; margin-bottom: 1.5rem; }
+        .content-section a { color: var(--accent-color); font-weight: bold; } /* Use accent color for links in About */
+        
+        /* --- Footer --- */
+        footer { text-align: center; font-size: 0.875rem; color: var(--muted-text-color); margin-top: 5rem; border-top: 1px solid var(--border-color); padding-top: 3rem; }
+
+        /* --- Utility --- */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .hidden { display: none !important; }
+        .loader-text { color: var(--muted-text-color); }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>HRTech Directory</h1>
+            <div class="header-nav">
+                <a href="#blog">Blog</a>
+                <a href="#about">About</a>
+                <button id="theme-toggle" aria-label="Toggle dark/light mode">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <h2>A curated list of high-quality tools for HR and Talent professionals.</h2>
+            
+            <div class="category-filters">
+                <!-- Filter buttons -->
+                 <button class="filter-btn active" data-category="all">All</button>
+                <button class="filter-btn" data-category="ATS">ATS</button>
+                <button class="filter-btn" data-category="Sourcing">Sourcing</button>
+                <button class="filter-btn" data-category="Interviewing">Interviewing</button>
+                <button class="filter-btn" data-category="Onboarding">Onboarding</button>
+                <button class="filter-btn" data-category="Free Tools">Free Tools</button>
+            </div>
+
+            <ul class="tool-list">
+                <p class="loader-text" id="tools-loader">Loading tools...</p>
+            </ul>
+        </main>
+        
+        <section id="blog" class="content-section">
+            <h1>Blog</h1>
+            <ul class="blog-list">
+                <p class="loader-text" id="blog-loader">Loading articles...</p>
+            </ul>
+        </section>
+
+        <section id="about" class="content-section">
+            <h1>About</h1>
+            <p>This project was created to provide a lightweight, high-performance, and visually elegant directory for HR and Talent tools. It's designed for recruiters, hiring managers, and HR professionals who value curated discovery and fast access.</p>
+            <p>Maintained by <a href="https://www.linkedin.com/in/vishaldembla/" target="_blank" rel="noopener noreferrer">Vishal Dembla</a> (with credit to AI assistants).</p>
+        </section>
+        
+        <footer>
+            HRTech Tools • A Talent Tools Initiative by Vishal Dembla
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- THEME SWITCHER LOGIC ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const documentElement = document.documentElement;
+
+            // 1. Function to apply the theme
+            function applyTheme(theme) {
+                documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+            }
+
+            // 2. Event listener for the toggle button
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+
+            // 3. Get preferred theme from localStorage or system setting
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const initialTheme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+            
+            // Apply the initial theme without waiting for content load to prevent flash
+            applyTheme(initialTheme);
+
+
+            // --- CONTENT LOADING LOGIC ---
+            const toolList = document.querySelector('.tool-list');
+            const blogList = document.querySelector('.blog-list');
+            const topFilterButtons = document.querySelectorAll('.filter-btn');
+
+            Promise.all([
+                fetch('tools.json').then(response => response.json()),
+                fetch('blog.json').then(response => response.json())
+            ])
+            .then(([tools, posts]) => {
+                renderTools(tools);
+                renderBlog(posts);
+                setupEventListeners();
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                toolList.innerHTML = '<p class="loader-text">Failed to load content.</p>';
+                blogList.innerHTML = '';
+            });
+            
+            function renderTools(tools) {
+                toolList.innerHTML = '';
+                tools.forEach(tool => {
+                    toolList.insertAdjacentHTML('beforeend', `
+                        <li class="tool-card" data-category="${tool.category}">
+                            <div class="tool-info">
+                                <h3><a href="${tool.link}" target="_blank" rel="noopener noreferrer">${tool.name} <span class="link-arrow">↗</span></a></h3>
+                            </div>
+                            <div class="tool-category-tag" data-category="${tool.category}">${tool.category}</div>
+                        </li>
+                    `);
+                });
+            }
+
+            function renderBlog(posts) {
+                blogList.innerHTML = '';
+                posts.forEach(post => {
+                    blogList.insertAdjacentHTML('beforeend', `
+                        <li class="blog-post">
+                            <div class="blog-post-info">
+                                <h3><a href="${post.link}">${post.title}</a></h3>
+                                <p>${post.description}</p>
+                            </div>
+                            <div class="blog-post-status">${post.status}</div>
+                        </li>
+                    `);
+                });
+            }
+
+            function setupEventListeners() {
+                const filterTools = (category) => {
+                    topFilterButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.category === category));
+                    document.querySelectorAll('.tool-list .tool-card').forEach(card => {
+                        const isVisible = (category === 'all' || card.dataset.category === category);
+                        card.classList.toggle('hidden', !isVisible);
+                    });
+                };
+
+                topFilterButtons.forEach(button => {
+                    button.addEventListener('click', () => filterTools(button.dataset.category));
+                });
+
+                toolList.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('tool-category-tag')) {
+                        const category = e.target.dataset.category;
+                        filterTools(category);
+                        e.target.closest('.tool-list').scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
