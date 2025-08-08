@@ -1,7 +1,12 @@
 
 # HRTech Tools Directory
 
-A lightweight, high-performance directory of curated HR and Talent tools — designed for recruiters, hiring managers, and HR professionals who value clarity, speed, and usability.  
+This project was created to provide a lightweight, high-performance, and visually elegant directory for HR and Talent tools. It's designed for recruiters, hiring managers, and HR professionals who value curated discovery and fast access.
+
+The site’s speed and design are inspired by two brilliant projects:
+1MB Club for its minimal, performance-first philosophy, and Evil Rabbit for its refined aesthetic and typography.
+
+Maintained by Vishal Dembla — with support from AI assistants including ChatGPT, Google AI Studio, and Lovable.  
 https://vishal-dembla.github.io/hrtech-tools-directory/
 
 ---
@@ -12,10 +17,9 @@ This site helps users discover and explore a growing list of HRTech tools across
 
 It eliminates the noise of bloated HR software directories by:
 
-- Curating tools relevant for modern recruiting and HR workflows  
-- Categorizing them clearly for top-of-funnel, mid-funnel, and post-hire functions  
+- Curating & categorizing HrTech Tools 
 - Highlighting free tools and emerging solutions alongside established platforms  
-- Offering an integrated blog with practical sourcing tips, tool reviews, and guides
+- Offering an integrated blog with category lists, tool reviews, and guides
 
 ---
 
@@ -29,11 +33,10 @@ It’s also an experiment in building useful content and design-driven products 
 
 ## Features
 
-- Filterable directory with 14 tool categories  
-- Built-in blog section for sourcing guides and tool breakdowns  
+- Filterable directory with 10+ tool categories  
+- Built-in blog section for category wise lists and tool breakdowns  
 - Dedicated About section with project context and credits  
-- Smooth scroll, fast performance, and mobile-friendly layout  
-- Dark mode UI inspired by Evil Rabbit and 1MB Club  
+- Smooth scroll, fast performance, and mobile-friendly layout   
 - No images, no tracking, no ads — just utility and speed  
 - Easily scalable to 1,000+ tools and 50+ blog posts
 
@@ -55,7 +58,7 @@ Notes: Popular enterprise-grade applicant tracking system
 ## Tech Stack
 
 - HTML  
-- Custom Vanilla CSS (Evil Rabbit-inspired dark UI)  
+- Custom Vanilla CSS
 - Vanilla JavaScript (filtering, category tagging)  
 - Fully static site hosted on GitHub Pages  
 - No frameworks or dependencies
