@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Greenhouse",
+        "link": "https://www.greenhouse.io/",
+        "category": "ATS"
+    },
+    {
+        "name": "LinkedIn Recruiter",
+        "link": "https://www.linkedin.com/talent/",
+        "category": "Sourcing"
+    },
+    {
+        "name": "HackerRank",
+        "link": "https://www.hackerrank.com/",
+        "category": "Interviewing"
+    },
+    {
+        "name": "Lever",
+        "link": "https://www.lever.co/",
+        "category": "ATS"
+    },
+    {
+        "name": "DocuSign",
+        "link": "https://www.docusign.com/",
+        "category": "Onboarding"
+    },
+    {
+        "name": "Notion",
+        "link": "https://www.notion.so/",
+        "category": "Free Tools"
+    }
+]
