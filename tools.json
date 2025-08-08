@@ -28,5 +28,35 @@
         "name": "Notion",
         "link": "https://www.notion.so/",
         "category": "Free Tools"
-    }
+    },
+    
+{
+    "name": "Trello",
+    "link": "https://trello.com/",
+    "category": "Free Tools"
+},
+     "name": "Apollo",
+        "link": "https://www.apollo.io/",
+        "category": "Contact/Email Finder"
+    },
+    {
+        "name": "Lusha",
+        "link": "https://www.lusha.com",
+        "category": "Contact/Email Finder"
+    },
+    
+{
+    "name": "ContactOut",
+    "link": "https://www.contactout.com",
+    "category": "Contact/Email Finder"
+},
+      "name": "Hunter",
+        "link": "https://hunter.io",
+        "category": "Contact/Email Finder"
+    },
+    
+{
+    "name": "RocketReach",
+    "link": "https://rocketreach.co",
+    "category": "Contact/Email Finder"
 ]
